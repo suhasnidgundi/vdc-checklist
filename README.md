@@ -1,8 +1,34 @@
-# React + Vite
+# Project Name
+VDC Checklist
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
 
-Currently, two official plugins are available:
+A brief description of your project.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Installation
+
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/suhasnidgundi/vdc-checklist.git
+    ```
+2. Navigate to the project directory:
+    ```sh
+    cd vdc-checklist
+    ```
+3. Install dependencies:
+    ```sh
+    pnpm install
+    ```
+
+## Usage
+
+To start the development server, run:
+```sh
+pnpm run dev
