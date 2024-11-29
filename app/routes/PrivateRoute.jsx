@@ -1,26 +1,20 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import useAuthStore from '../store/authStore';
 import { ROLES } from '../../constants';
-import useSessionStore from '../hooks/useSessionStore';
+import useAuthStore from '../store/authStore';
 
 const PrivateRoute = ({ allowedRoles }) => {
+    const { isAuthenticated } = useAuthStore();
 
-    const isAuthenticated = sessionStorage.getItem("isAuthenticated");
-    const role = sessionStorage.getItem("role");
+    // Get user's role from the Session Storage
+    const role = sessionStorage.getItem('role'); 
 
     // If not authenticated, redirect to login
     if (!isAuthenticated) {
-        // return <Navigate to="/login" replace />;
-        return <Outlet />;
+        return <Navigate to="/login" replace />;
     }
 
     // If no roles specified, allow access to all authenticated users
     if (!allowedRoles || allowedRoles.length === 0) {
-        return <Outlet />;
-    }
-
-    // Super Admin gets full access
-    if (role === ROLES.SUPER_ADMIN) {
         return <Outlet />;
     }
 

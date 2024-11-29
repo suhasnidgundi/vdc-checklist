@@ -12,8 +12,8 @@ export const ROLES = {
 // In constants.js or a new file like roleRoutes.js
 export const ROLE_ROUTES = {
   [ROLES.BRANCH_MANAGER]: [
-    { path: '/dashboard', label: 'Dashboard', icon: 'home' },
-    { path: '/BM_Dashboard', label: 'BM Dashboard', icon: 'chart-line' },
+    { link: '/dashboard', title: 'Dashboard', icon: 'fas fa-tachometer-alt' },
+    { link: '/BM_Dashboard', title: 'Branch Manager Dashboard', icon: 'fas fa-tachometer-alt' },
     // Add other BM-specific routes
   ],
   [ROLES.CLUSTER_MANAGER]: [
@@ -36,14 +36,47 @@ export const ROLE_ROUTES = {
     { path: '/zcm_list', label: 'CM List', icon: 'users' },
   ],
   [ROLES.SUPER_ADMIN]: [
-    { path: '/dashboard', label: 'Dashboard', icon: 'home' },
-    { path: '/manage_branch', label: 'Manage Branches', icon: 'building' },
-    { path: '/manage_cluster', label: 'Manage Clusters', icon: 'layer-group' },
-    { path: '/manage_users', label: 'Manage Users', icon: 'users' },
-    { path: '/manage_area', label: 'Manage Areas', icon: 'map-marked-alt' },
-    { path: '/cluster_map', label: 'Cluster Map', icon: 'map' },
-    { path: '/zone_map', label: 'Zone Map', icon: 'globe' },
-    { path: '/manage_zone', label: 'Manage Zones', icon: 'mountain' },
+    {
+      title: "Dashboard",
+      icon: "fas fa-tachometer-alt",
+      link: "/dashboard"
+    },
+    {
+      title: "Settings",
+      icon: "fas fa-cogs",
+      subLinks: [
+        {
+          title: "Manage Zone",
+          icon: "fas fa-map-marked-alt",
+          link: "/manage_zone"
+        },
+        {
+          title: "Branch List",
+          icon: "fas fa-list",
+          link: "/manage_branch"
+        },
+        {
+          title: "Cluster List",
+          icon: "fas fa-list",
+          link: "/manage_cluster"
+        },
+        {
+          title: "Zone Map",
+          icon: "fas fa-map",
+          link: "/zone_map"
+        },
+        {
+          title: "User Details",
+          icon: "fas fa-user",
+          link: "/manage_users"
+        }
+      ]
+    },
+    {
+      title: "Log Out",
+      icon: "fas fa-sign-out-alt",
+      link: "/logout"
+    }
   ]
 };
 

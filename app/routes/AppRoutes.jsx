@@ -66,16 +66,16 @@ export const router = createBrowserRouter([
     path: "/logout",
     element: <Logout />,
   },
+  {
+    path: "/",
+    element: <Welcome />,
+  },
 
 
   // Cluster Manager routes
   {
     element: <PrivateRoute allowedRoles={[ROLES.CLUSTER_MANAGER]} />,
     children: [
-      {
-        path: '/dashboard',
-        element: <Dashboard />,
-      },
       {
         path: '/CM_Dashboard',
         element: <CMDashboard />,
@@ -115,10 +115,6 @@ export const router = createBrowserRouter([
       {
         path: '/cmnightgrid',
         element: <CmNightGrid />,
-      },
-      {
-        path: '/',
-        element: <Welcome />,
       }
     ]
   },
@@ -128,10 +124,6 @@ export const router = createBrowserRouter([
   {
     element: <PrivateRoute allowedRoles={[ROLES.ZONAL_MANAGER]} />,
     children: [
-      {
-        path: '/dashboard',
-        element: <Dashboard />,
-      },
       {
         path: '/ZONAL_Dashboard',
         element: <ZONAL_Dashboard />,
@@ -143,10 +135,6 @@ export const router = createBrowserRouter([
       {
         path: '/zcm_list',
         element: <Zcm_list />,
-      },
-      {
-        path: '/',
-        element: <Welcome />,
       }
     ]
   },
@@ -155,10 +143,6 @@ export const router = createBrowserRouter([
   {
     element: <PrivateRoute allowedRoles={[ROLES.AVP]} />,
     children: [
-      {
-        path: '/dashboard',
-        element: <Dashboard />,
-      },
       {
         path: '/AVP_Dashboard',
         element: <AVP_Dashboard />,
@@ -174,10 +158,6 @@ export const router = createBrowserRouter([
       {
         path: '/cmtask',
         element: <CmTask />,
-      },
-      {
-        path: '/',
-        element: <Welcome />,
       }
     ]
   },
@@ -186,10 +166,6 @@ export const router = createBrowserRouter([
   {
     element: <PrivateRoute allowedRoles={[ROLES.SUPER_ADMIN]} />,
     children: [
-      {
-        path: '/dashboard',
-        element: <Dashboard />,
-      },
       {
         path: '/manage_branch',
         element: <ManageBranch />,
@@ -218,10 +194,6 @@ export const router = createBrowserRouter([
         path: '/manage_zone',
         element: <ManageZone />,
       },
-      {
-        path: '/',
-        element: <Welcome />,
-      }
     ]
   },
 
@@ -229,10 +201,6 @@ export const router = createBrowserRouter([
   {
     element: <PrivateRoute />,
     children: [
-      {
-        path: "/",
-        element: <Welcome />,
-      },
       {
         path: "/dashboard",
         element: <Dashboard />,
