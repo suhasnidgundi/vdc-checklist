@@ -1,6 +1,6 @@
 import React from 'react'
 import DashboardLayout from '../../../layouts/DashboardLayout'
-import Welcome from '../Welcome'
+import { Link } from 'react-router-dom'
 
 const BMDashboard = () => {
   return (
@@ -17,7 +17,7 @@ const BMDashboard = () => {
             <div class="icon">
               <i class="ion ion-bag"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <Link to="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></Link>
           </div>
         </div>
         {/* <!-- ./col --> */}
@@ -32,7 +32,7 @@ const BMDashboard = () => {
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <Link to="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></Link>
           </div>
         </div>
         {/* <!-- ./col --> */}
@@ -47,7 +47,7 @@ const BMDashboard = () => {
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <Link to="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></Link>
           </div>
         </div>
         {/* <!-- ./col --> */}
@@ -62,7 +62,7 @@ const BMDashboard = () => {
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <Link to="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></Link>
           </div>
         </div>
         {/* <!-- ./col --> */}

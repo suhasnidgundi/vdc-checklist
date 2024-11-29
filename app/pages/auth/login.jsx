@@ -4,6 +4,7 @@ import { useState } from 'react';
 import HomeLayout from '../../layouts/HomeLayout';
 import useAuthStore from '../../store/authStore';
 import { loginValidationSchema } from '../../utils/validation';
+
 function Login() {
 
     const { login } = useAuthStore();
@@ -39,7 +40,7 @@ function Login() {
             <div className="login-box">
                 <div className="card card-outline card-primary">
                     <div className="card-header text-center">
-                        <a className="h1"><b>VDC</b> Checklist</a>
+                        <Link className="h1" to="/"><b>VDC</b> Checklist</Link>
                     </div>
                     <div className="card-body">
                         <p className="login-box-msg">Sign in to start your session</p>

@@ -9,7 +9,7 @@ function Register() {
     return (
         <div class="register-box">
             <div class="register-logo">
-                <a href=""><b>VDC</b> Checklist</a>
+                <Link to="/"><b>VDC</b> Checklist</Link>
             </div>
 
             <div class="card">
@@ -54,7 +54,7 @@ function Register() {
                                 <div class="icheck-primary">
                                     <input type="checkbox" id="agreeTerms" name="terms" value="agree" />
                                     <label for="agreeTerms">
-                                        I agree to the <a href="#">terms</a>
+                                        I agree to the <Link to="/terms-and-condition">terms</Link>
                                     </label>
                                 </div>
                             </div>

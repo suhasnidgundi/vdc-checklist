@@ -9,7 +9,7 @@ function ForgotPassword() {
     return (
         <div class="login-box">
             <div class="login-logo">
-                <a href="../../index2.html"><b>VDC</b> Checklist</a>
+                <Link to="/"><b>VDC</b> Checklist</Link>
             </div>
             {/* <!-- /.login-logo --> */}
             <div class="card">
@@ -34,10 +34,10 @@ function ForgotPassword() {
                     </form>
 
                     <p class="mt-3 mb-1">
-                        <Link href="login">Login</Link>
+                        <Link to="/login">Login</Link>
                     </p>
                     <p class="mb-0">
-                        <Link href="/register" class="text-center">Register a new membership</Link>
+                        <Link to="/register" class="text-center">Register a new membership</Link>
                     </p>
                 </div>
                 {/* <!-- /.login-card-body --> */}
