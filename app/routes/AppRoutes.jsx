@@ -72,6 +72,17 @@ export const router = createBrowserRouter([
   },
 
 
+  // Employee routes
+  {
+    element: <PrivateRoute allowedRoles={[ROLES.EMPLOYEE]} />,
+    children: [
+      {
+        path: "/BM_Dashboard",
+        element: <BMDashboard />,
+      },
+    ]
+  },
+
   // Cluster Manager routes
   {
     element: <PrivateRoute allowedRoles={[ROLES.CLUSTER_MANAGER]} />,

@@ -6,7 +6,7 @@ const authService = {
     login: async (credentials) => {
         try {
             const response = await axios.post(
-                `${BASE_URL}/api/login`,
+                `${BASE_URL}api/login`,
                 new URLSearchParams(credentials),
                 {
                     headers: {
@@ -44,7 +44,7 @@ const authService = {
                 throw new Error('No authentication token found');
             }
 
-            const response = await axios.get(`${BASE_URL}/api/profile`, {
+            const response = await axios.get(`${BASE_URL}api/profile`, {
                 headers: {
                     Authorization: `Bearer ${token.trim()}`
                 }
