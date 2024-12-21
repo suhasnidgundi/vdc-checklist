@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-function ContentWrapper({ children, title }) {
+function  ContentWrapper({ children, title }) {
     return (
         // <!-- Content Wrapper. Contains page content -->
         <div className="content-wrapper">

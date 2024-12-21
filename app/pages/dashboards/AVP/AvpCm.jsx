@@ -1,8 +1,9 @@
 import React from 'react'
+import DashboardLayout from '../../../layouts/DashboardLayout'
 
 function AvpCm() {
   return (
-    <div>AvpCm</div>
+    <DashboardLayout>AvpCm</DashboardLayout>
   )
 }
 

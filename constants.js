@@ -24,10 +24,26 @@ export const ROLE_ROUTES = {
     { path: '/cmGrid', label: 'Task Grid', icon: 'grid' },
   ],
   [ROLES.AVP]: [
-    { path: '/dashboard', label: 'Dashboard', icon: 'home' },
-    { path: '/AVP_Dashboard', label: 'AVP Dashboard', icon: 'chart-line' },
-    { path: '/avpBranch', label: 'Branches', icon: 'building' },
-    { path: '/avpCm', label: 'Cluster Managers', icon: 'users' },
+    {
+      title: "Dashboard",
+      icon: "fas fa-tachometer-alt",
+      link: "/AVP_Dashboard"
+    },
+    {
+      title: "BM Tasks",
+      icon: "fas fa-th",
+      link: "/avpBranch"
+    },
+    {
+      title: "CM Tasks",
+      icon: "fas fa-th",
+      link: "/avpCm"
+    },
+    {
+      title: "AVP Tasks",
+      icon: "fas fa-th",
+      link: "/"
+    }
   ],
   [ROLES.ZONAL_MANAGER]: [
     { path: '/dashboard', label: 'Dashboard', icon: 'home' },

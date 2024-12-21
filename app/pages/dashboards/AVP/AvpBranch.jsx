@@ -1,8 +1,9 @@
 import React from 'react'
+import DashboardLayout from '../../../layouts/DashboardLayout'
 
 function AvpBranch() {
   return (
-    <div>AvpBranch</div>
+    <DashboardLayout>AvpBranch</DashboardLayout>
   )
 }
 
