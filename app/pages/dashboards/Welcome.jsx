@@ -22,7 +22,7 @@ function Welcome() {
           <p className="lead text-muted mb-4">
             Streamline your workflow and enhance productivity with our comprehensive checklist management system.
           </p>
-          <div className="d-flex" style={{gap: '1rem'}}>
+          <div className="d-flex" style={{ gap: '1rem' }}>
             <Link to="/login" className="btn btn-primary btn-lg px-4">
               Login
             </Link>
@@ -65,7 +65,7 @@ function Welcome() {
 
                 <div className="row g-4">
                   {userDetails.map((detail, index) => (
-                    <div key={index} className="col-md-6">
+                    <div key={index} className="col-md-6 py-2">
                       <div className="p-3 border rounded bg-light h-100">
                         <div className="d-flex align-items-center">
                           <i className={`${detail.icon} text-primary me-2 fs-5`}></i>
@@ -79,9 +79,12 @@ function Welcome() {
                   ))}
                 </div>
 
-                <div className="text-center mt-4">
+                <div className="d-flex py-2" style={{ gap: '1rem' }}>
                   <Link to="/dashboard" className="btn btn-primary btn-lg px-4">
                     Go to Dashboard
+                  </Link>
+                  <Link to="/logout" className="btn btn-danger btn-lg px-4">
+                    Logout
                   </Link>
                 </div>
               </div>

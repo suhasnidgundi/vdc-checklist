@@ -57,11 +57,7 @@ const useAuthStore = create(
                     });
                 }
             }
-        }),
-        {
-            name: 'auth-storage', // unique name
-            getStorage: () => sessionStorage // use sessionStorage instead of localStorage
-        }
+        })
     )
 );
 
