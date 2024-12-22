@@ -37,7 +37,7 @@ function ForgotPassword() {
                         <Link to="/login">Login</Link>
                     </p>
                     <p className="mb-0">
-                        <Link to="/register" className="text-center">Register a new membership</Link>
+                        <Link to="/register" className="text-center">Register a new User</Link>
                     </p>
                 </div>
                 {/* <!-- /.login-card-body --> */}

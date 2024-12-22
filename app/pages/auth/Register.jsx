@@ -13,7 +13,7 @@ function Register() {
 
             <div className="card">
                 <div className="card-body register-card-body">
-                    <p className="login-box-msg">Register a new membership</p>
+                    <p className="login-box-msg">Register a new User</p>
 
                     <form action="" method="post">
                         <div className="input-group mb-3">
@@ -65,7 +65,7 @@ function Register() {
                         </div>
                     </form>
 
-                    <Link href="/login" className="text-center">I already have a membership</Link>
+                    <Link href="/login" className="text-center">I already have a User</Link>
                 </div>
                 {/* <!-- /.form-box --> */}
             </div>
