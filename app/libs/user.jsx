@@ -1,6 +1,6 @@
 // Utility function to get the user profile from sessionStorage
 const getUserProfile = () => {
-    const userProfileData = sessionStorage.getItem("userProfile");
+    const userProfileData = sessionStorage.getItem("user");
     return userProfileData ? JSON.parse(userProfileData) : null;
 };
 

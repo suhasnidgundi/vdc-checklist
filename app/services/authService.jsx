@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import useAuthStore from '../store/authStore'
 const BASE_URL = import.meta.env.VITE_API_URL
 
 const authService = {
@@ -39,7 +39,7 @@ const authService = {
     },
     getUserProfile: async () => {
         try {
-            const token = sessionStorage.getItem('authToken');
+            const token = sessionStorage.getItem('token');
             if (!token) {
                 throw new Error('No authentication token found');
             }
@@ -51,18 +51,23 @@ const authService = {
             });
 
             if (response.data.status) {
+
                 // Store user profile in session storage
                 sessionStorage.setItem(
-                    'userProfile',
+                    'user',
                     JSON.stringify(response.data.profile)
                 );
+
+                // Store user profile in the store
+                useAuthStore.setState({ user: response.data.profile });
+
                 return response.data;
             } else {
                 throw new Error(response.data.message || 'Profile fetch error');
             }
         } catch (error) {
             // If there's an error fetching the profile, remove the token
-            sessionStorage.removeItem('authToken');
+            sessionStorage.removeItem('token');
             throw error.response?.data || error.message || 'Profile fetch error';
         }
     }

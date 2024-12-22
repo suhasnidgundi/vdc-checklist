@@ -1,16 +1,25 @@
 // Description: This file contains all the constants used in the application.
 
-// Roles
 export const ROLES = {
   BRANCH_MANAGER: 'BRANCH_MANAGER',
-  CLUSTER_MANAGER: 'CLUSTER_MANAGER',
-  EMPLOYEE:"EMPLOYEE",
+  CLUSTER_MANAGER: 'CM',
+  EMPLOYEE: "EMPLOYEE",
   AVP: 'AVP',
   ZONAL_MANAGER: 'ZONAL_MANAGER',
   SUPER_ADMIN: 'SUPER_ADMIN'
 };
 
-// In constants.js or a new file like roleRoutes.js
+// Add role hierarchy to define who can access what
+export const ROLE_HIERARCHY = {
+  SUPER_ADMIN: [ROLES.SUPER_ADMIN, ROLES.AVP, ROLES.ZONAL_MANAGER, ROLES.CLUSTER_MANAGER, ROLES.BRANCH_MANAGER, ROLES.EMPLOYEE],
+  AVP: [ROLES.AVP, ROLES.CLUSTER_MANAGER, ROLES.BRANCH_MANAGER],
+  ZONAL_MANAGER: [ROLES.ZONAL_MANAGER, ROLES.CLUSTER_MANAGER, ROLES.BRANCH_MANAGER],
+  CLUSTER_MANAGER: [ROLES.CLUSTER_MANAGER, ROLES.BRANCH_MANAGER],
+  BRANCH_MANAGER: [ROLES.BRANCH_MANAGER],
+  EMPLOYEE: [ROLES.EMPLOYEE]
+};
+
+// 
 export const ROLE_ROUTES = {
   [ROLES.BRANCH_MANAGER]: [
     { link: '/dashboard', title: 'Dashboard', icon: 'fas fa-tachometer-alt' },
@@ -18,6 +27,11 @@ export const ROLE_ROUTES = {
     // Add other BM-specific routes
   ],
   [ROLES.CLUSTER_MANAGER]: [
+    {
+      title: "Dashboard",
+      icon: "fas fa-tachometer-alt",
+      link: "/AVP_Dashboard"
+    },
     { path: '/dashboard', label: 'Dashboard', icon: 'home' },
     { path: '/CM_Dashboard', label: 'CM Dashboard', icon: 'chart-line' },
     { path: '/cmMorningTask', label: 'Morning Tasks', icon: 'sun' },

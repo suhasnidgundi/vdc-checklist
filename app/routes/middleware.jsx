@@ -1,13 +1,11 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
+import { ROLE_HIERARCHY } from '../../constants';
 
-const PrivateRoute = ({ allowedRoles }) => {
+const Middleware = ({ allowedRoles }) => {
     const { isAuthenticated } = useAuthStore();
+    const userRole = sessionStorage.getItem('role');
 
-    // Get user's role from the Session Storage
-    const role = sessionStorage.getItem('role'); 
-
-    // If not authenticated, redirect to login
     if (!isAuthenticated) {
         return <Navigate to="/login" replace />;
     }
@@ -17,13 +15,17 @@ const PrivateRoute = ({ allowedRoles }) => {
         return <Outlet />;
     }
 
-    // Check if user's role is in the allowed roles
-    if (allowedRoles.includes(role)) {
+    // Get all roles the user has access to based on their role hierarchy
+    const accessibleRoles = ROLE_HIERARCHY[userRole] || [userRole];
+
+    // Check if user has access to any of the allowed roles
+    const hasAccess = allowedRoles.some(role => accessibleRoles.includes(role));
+
+    if (hasAccess) {
         return <Outlet />;
     }
 
-    // If user doesn't have required role, redirect to unauthorized page
     return <Navigate to="/unauthorized" replace />;
 };
 
-export default PrivateRoute;
+export default Middleware;

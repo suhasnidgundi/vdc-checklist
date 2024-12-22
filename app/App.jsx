@@ -1,7 +1,7 @@
 import { RouterProvider } from 'react-router-dom';
-import { router } from './routes/AppRoutes';
 import { useEffect } from 'react';
 import useAuthStore from './store/authStore';
+import { router } from './routes/AppRoutes';
 
 function App() {
   const { checkAuthStatus } = useAuthStore();

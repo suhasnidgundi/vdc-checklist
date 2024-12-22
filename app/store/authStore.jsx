@@ -5,10 +5,10 @@ import authService from '../services/authService';
 const useAuthStore = create(
     persist(
         (set, get) => ({
-            user: null,
+            token: null,
             isAuthenticated: false,
             role: "",
-            authToken: null,
+            user: null,
 
             login: async (credentials, navigate) => {
                 try {
@@ -17,18 +17,16 @@ const useAuthStore = create(
 
                     // Persist in sessionStorage
                     sessionStorage.setItem('isAuthenticated', 'true');
-                    sessionStorage.setItem('authToken', response.token)
+                    sessionStorage.setItem('token', response?.token)
                     sessionStorage.setItem('role', response?.role);
-                    sessionStorage.setItem('area', response.area || '')
-                    sessionStorage.setItem('area_id', response.area_id || '')
 
-                    const userData = await authService.getUserProfile();
+                    await authService.getUserProfile();
 
                     // Set authentication details
                     set({
-                        user: userData?.user,
                         isAuthenticated: true,
-                        role: response?.role
+                        token: response?.token,
+                        role: response?.role,
                     });
 
                     // Redirect to dashboard
@@ -36,26 +34,26 @@ const useAuthStore = create(
 
                     return response;
                 } catch (error) {
-                    set({ user: null, isAuthenticated: false });
+                    set({ token: null, role: "", isAuthenticated: false, user: null });
                     throw error;
                 }
             },
 
             logout: () => {
-                set({ user: null, isAuthenticated: false });
+                set({ token: null, role: "", isAuthenticated: false, user: null });
                 sessionStorage.removeItem('isAuthenticated');
+                sessionStorage.removeItem('token');
                 sessionStorage.removeItem('role');
                 sessionStorage.removeItem('user');
             },
 
             checkAuthStatus: () => {
-                const storedAuth = sessionStorage.getItem('isAuthenticated');
-                const storedUser = sessionStorage.getItem('role');
+                const storedIsAuthenticated = sessionStorage.getItem('isAuthenticated');
+                const storedRole = sessionStorage.getItem('role');
 
-                if (storedAuth === 'true' && storedUser) {
+                if (storedIsAuthenticated === 'true' && storedRole) {
                     set({
                         isAuthenticated: true,
-                        user: JSON.parse(storedUser)
                     });
                 }
             }

@@ -39,10 +39,10 @@ import ManageClusterMap from "../pages/manage/ManageClusterMap";
 import ManageZoneMap from "../pages/manage/ManageZoneMap";
 import ManageZone from "../pages/manage/ManageZone";
 import Unauthorized from "../pages/401";
-import PrivateRoute from "./PrivateRoute";
 import { ROLES } from "../../constants";
 import Login from "../pages/auth/login";
 import Logout from "../pages/auth/Logout";
+import Middleware from "./middleware";
 
 export const router = createBrowserRouter([
   // Public routes
@@ -71,21 +71,9 @@ export const router = createBrowserRouter([
     element: <Welcome />,
   },
 
-
-  // Employee routes
-  {
-    element: <PrivateRoute allowedRoles={[ROLES.EMPLOYEE]} />,
-    children: [
-      {
-        path: "/BM_Dashboard",
-        element: <BMDashboard />,
-      },
-    ]
-  },
-
   // Cluster Manager routes
   {
-    element: <PrivateRoute allowedRoles={[ROLES.CLUSTER_MANAGER]} />,
+    element: <Middleware allowedRoles={[ROLES.CLUSTER_MANAGER]} />,
     children: [
       {
         path: '/CM_Dashboard',
@@ -133,7 +121,7 @@ export const router = createBrowserRouter([
   // Zonal Manager routes
   
   {
-    element: <PrivateRoute allowedRoles={[ROLES.ZONAL_MANAGER]} />,
+    element: <Middleware allowedRoles={[ROLES.ZONAL_MANAGER]} />,
     children: [
       {
         path: '/ZONAL_Dashboard',
@@ -152,7 +140,7 @@ export const router = createBrowserRouter([
 
   // AVP routes
   {
-    element: <PrivateRoute allowedRoles={[ROLES.AVP]} />,
+    element: <Middleware allowedRoles={[ROLES.AVP]} />,
     children: [
       {
         path: '/AVP_Dashboard',
@@ -175,7 +163,7 @@ export const router = createBrowserRouter([
 
   // SUPER ADMIN routes
   {
-    element: <PrivateRoute allowedRoles={[ROLES.SUPER_ADMIN]} />,
+    element: <Middleware allowedRoles={[ROLES.SUPER_ADMIN]} />,
     children: [
       {
         path: '/manage_branch',
@@ -210,20 +198,12 @@ export const router = createBrowserRouter([
 
   // Common routes for all authenticated users
   {
-    element: <PrivateRoute />,
+    element: <Middleware />,
     children: [
       {
         path: "/dashboard",
         element: <Dashboard />,
-      },
-      {
-        path: "/morningtask",
-        element: <Morningtask />,
-      },
-      {
-        path: "/nighttask",
-        element: <Nighttask />,
-      },
+      }
     ]
   },
 ]);
