@@ -1,8 +1,9 @@
 import React from 'react'
+import DashboardLayout from '../../../layouts/DashboardLayout'
 
 function CmMorningTasksk() {
   return (
-    <div>CmMorningTasksk</div>
+    <DashboardLayout>CmMorningTasksk</DashboardLayout>
   )
 }
 

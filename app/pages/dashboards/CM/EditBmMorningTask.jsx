@@ -2,7 +2,7 @@ import React from 'react'
 
 function EditBmMorningTask() {
   return (
-    <div>EditBmMorningTask</div>
+    <DashboardLayout>EditBmMorningTask</DashboardLayout>
   )
 }
 

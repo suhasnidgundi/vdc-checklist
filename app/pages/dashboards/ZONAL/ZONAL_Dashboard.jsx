@@ -1,8 +1,9 @@
 import React from 'react'
+import DashboardLayout from '../../../layouts/DashboardLayout'
 
 function ZONAL_Dashboard() {
   return (
-    <div>ZONAL_Dashboard</div>
+    <DashboardLayout>ZONAL_Dashboard</DashboardLayout>
   )
 }
 

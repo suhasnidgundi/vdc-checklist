@@ -1,8 +1,9 @@
 import React from 'react'
+import DashboardLayout from '../../../layouts/DashboardLayout'
 
 function BmcMorningGrid() {
   return (
-    <div>BmcMorningGrid</div>
+    <DashboardLayout>BmcMorningGrid</DashboardLayout>
   )
 }
 

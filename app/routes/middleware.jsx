@@ -1,8 +1,8 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
-import { ROLE_HIERARCHY } from '../../constants';
+import { ROLE_HIERARCHY, ROLES } from '../../constants';
 
-const Middleware = ({ allowedRoles }) => {
+const Middleware = ({ allowedRoles = [] }) => {
     const { isAuthenticated } = useAuthStore();
     const userRole = sessionStorage.getItem('role');
 
@@ -10,22 +10,22 @@ const Middleware = ({ allowedRoles }) => {
         return <Navigate to="/login" replace />;
     }
 
-    // If no roles specified, allow access to all authenticated users
+    // If no roles specified, only allow SUPER_ADMIN
     if (!allowedRoles || allowedRoles.length === 0) {
-        return <Outlet />;
+        return userRole === ROLES.SUPER_ADMIN ? <Outlet /> : <Navigate to="/unauthorized" replace />;
     }
 
-    // Get all roles the user has access to based on their role hierarchy
-    const accessibleRoles = ROLE_HIERARCHY[userRole] || [userRole];
+    // Get accessible roles based on user's role hierarchy
+    const accessibleRoles = ROLE_HIERARCHY[userRole] || [];
 
-    // Check if user has access to any of the allowed roles
+    // Check if user has permission for any of the allowed roles
     const hasAccess = allowedRoles.some(role => accessibleRoles.includes(role));
 
-    if (hasAccess) {
-        return <Outlet />;
+    if (!hasAccess) {
+        return <Navigate to="/unauthorized" replace />;
     }
 
-    return <Navigate to="/unauthorized" replace />;
+    return <Outlet />;
 };
 
 export default Middleware;

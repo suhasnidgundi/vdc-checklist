@@ -1,10 +1,10 @@
 import React from 'react'
 import DashboardLayout from '../../../layouts/DashboardLayout'
 
-function CmGrid() {
+const BmWeeklyGrid = () => {
   return (
-    <DashboardLayout>CmGrid</DashboardLayout>
+    <DashboardLayout>BmWeeklyGrid</DashboardLayout>
   )
 }
 
-export default CmGrid
+export default BmWeeklyGrid

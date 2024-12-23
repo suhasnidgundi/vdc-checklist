@@ -1,42 +1,70 @@
-// Description: This file contains all the constants used in the application.
-
 export const ROLES = {
-  BRANCH_MANAGER: 'BRANCH_MANAGER',
-  CLUSTER_MANAGER: 'CM',
-  EMPLOYEE: "EMPLOYEE",
+  SUPER_ADMIN: 'SUPER_ADMIN',
   AVP: 'AVP',
   ZONAL_MANAGER: 'ZONAL_MANAGER',
-  SUPER_ADMIN: 'SUPER_ADMIN'
+  CM: 'CM',
+  BM: 'BM',
+  EMPLOYEE: 'EMPLOYEE'
 };
 
-// Add role hierarchy to define who can access what
+// Role hierarchy defining access levels (higher roles can access lower role features)
 export const ROLE_HIERARCHY = {
-  SUPER_ADMIN: [ROLES.SUPER_ADMIN, ROLES.AVP, ROLES.ZONAL_MANAGER, ROLES.CLUSTER_MANAGER, ROLES.BRANCH_MANAGER, ROLES.EMPLOYEE],
-  AVP: [ROLES.AVP, ROLES.CLUSTER_MANAGER, ROLES.BRANCH_MANAGER],
-  ZONAL_MANAGER: [ROLES.ZONAL_MANAGER, ROLES.CLUSTER_MANAGER, ROLES.BRANCH_MANAGER],
-  CLUSTER_MANAGER: [ROLES.CLUSTER_MANAGER, ROLES.BRANCH_MANAGER],
-  BRANCH_MANAGER: [ROLES.BRANCH_MANAGER],
-  EMPLOYEE: [ROLES.EMPLOYEE]
+  [ROLES.SUPER_ADMIN]: [
+    ROLES.SUPER_ADMIN,
+    ROLES.AVP,
+    ROLES.ZONAL_MANAGER,
+    ROLES.CM,
+    ROLES.BM,
+    ROLES.EMPLOYEE
+  ],
+  [ROLES.AVP]: [
+    ROLES.AVP,
+    ROLES.ZONAL_MANAGER,
+    ROLES.CM,
+    ROLES.BM,
+    ROLES.EMPLOYEE
+  ],
+  [ROLES.ZONAL_MANAGER]: [
+    ROLES.ZONAL_MANAGER,
+    ROLES.CM,
+    ROLES.BM,
+    ROLES.EMPLOYEE
+  ],
+  [ROLES.CM]: [
+    ROLES.CM,
+    ROLES.BM,
+    ROLES.EMPLOYEE
+  ],
+  [ROLES.BM]: [
+    ROLES.BM,
+    ROLES.EMPLOYEE
+  ],
+  [ROLES.EMPLOYEE]: [
+    ROLES.EMPLOYEE
+  ]
 };
 
 // 
 export const ROLE_ROUTES = {
-  [ROLES.BRANCH_MANAGER]: [
-    { link: '/dashboard', title: 'Dashboard', icon: 'fas fa-tachometer-alt' },
-    { link: '/BM_Dashboard', title: 'Branch Manager Dashboard', icon: 'fas fa-tachometer-alt' },
-    // Add other BM-specific routes
-  ],
-  [ROLES.CLUSTER_MANAGER]: [
+  [ROLES.BM]: [
+    { link: '/BM_Dashboard', title: 'BM Dashboard', icon: 'fas fa-tachometer-alt' },
+    { link: '/bmcombogrid', title: 'BM Tasks', icon: 'fas fa-th' },
+    { link: '/forgot-password', title: 'Change Password', icon: 'fas fa-unlock-alt' },
     {
-      title: "Dashboard",
-      icon: "fas fa-tachometer-alt",
-      link: "/AVP_Dashboard"
-    },
-    { path: '/dashboard', label: 'Dashboard', icon: 'home' },
-    { path: '/CM_Dashboard', label: 'CM Dashboard', icon: 'chart-line' },
-    { path: '/cmMorningTask', label: 'Morning Tasks', icon: 'sun' },
-    { path: '/cmNightTask', label: 'Night Tasks', icon: 'moon' },
-    { path: '/cmGrid', label: 'Task Grid', icon: 'grid' },
+      title: "Log Out",
+      icon: "fas fa-sign-out-alt",
+      link: "/logout"
+    }
+  ],
+  [ROLES.CM]: [
+    { link: '/CM_Dashboard', title: 'CM Dashboard', icon: 'fas fa-chart-line' },
+    { link: '/bmcombogrid', title: 'BM Tasks', icon: 'fas fa-th' },
+    { link: '/forgot-password', title: 'Change Password', icon: 'fas fa-unlock-alt' },
+    {
+      title: "Log Out",
+      icon: "fas fa-sign-out-alt",
+      link: "/logout"
+    }
   ],
   [ROLES.AVP]: [
     {
@@ -47,24 +75,32 @@ export const ROLE_ROUTES = {
     {
       title: "BM Tasks",
       icon: "fas fa-th",
-      link: "/avpBranch"
+      link: "/Bm_z_CombinedGrid"
     },
+    { link: '/forgot-password', title: 'Change Password', icon: 'fas fa-unlock-alt' },
     {
-      title: "CM Tasks",
-      icon: "fas fa-th",
-      link: "/avpCm"
-    },
-    {
-      title: "AVP Tasks",
-      icon: "fas fa-th",
-      link: "/"
+      title: "Log Out",
+      icon: "fas fa-sign-out-alt",
+      link: "/logout"
     }
   ],
   [ROLES.ZONAL_MANAGER]: [
-    { path: '/dashboard', label: 'Dashboard', icon: 'home' },
-    { path: '/ZONAL_Dashboard', label: 'Zonal Dashboard', icon: 'chart-line' },
-    { path: '/zonallist', label: 'Zonal List', icon: 'list' },
-    { path: '/zcm_list', label: 'CM List', icon: 'users' },
+    {
+      title: "Dashboard",
+      icon: "fas fa-tachometer-alt",
+      link: "/ZONAL_Dashboard"
+    },
+    {
+      title: "BM Tasks",
+      icon: "fas fa-th",
+      link: "/Bm_z_CombinedGrid"
+    },
+    { link: '/forgot-password', title: 'Change Password', icon: 'fas fa-unlock-alt' },
+    {
+      title: "Log Out",
+      icon: "fas fa-sign-out-alt",
+      link: "/logout"
+    }
   ],
   [ROLES.SUPER_ADMIN]: [
     {
@@ -103,6 +139,7 @@ export const ROLE_ROUTES = {
         }
       ]
     },
+    { link: '/forgot-password', title: 'Change Password', icon: 'fas fa-unlock-alt' },
     {
       title: "Log Out",
       icon: "fas fa-sign-out-alt",
@@ -114,130 +151,4 @@ export const ROLE_ROUTES = {
 // Utility function to get routes for a specific role
 export const getRoutesByRole = (role) => {
   return ROLE_ROUTES[role] || [];
-};
-
-// Predefined test users
-export const MOCK_USERS = {
-  'bm@test.com': {
-    email: 'bm@test.com',
-    name: 'Branch Manager',
-    user: 'Branch Manager',
-    role: ROLES.BRANCH_MANAGER
-  },
-  'cm@test.com': {
-    email: 'cm@test.com',
-    name: 'Cluster Manager',
-    user: 'Cluster Manager',
-    role: ROLES.CLUSTER_MANAGER
-  },
-  'avp@test.com': {
-    email: 'avp@test.com',
-    name: 'Assistant Vice President',
-    role: ROLES.AVP
-  },
-  'zonal@test.com': {
-    email: 'zonal@test.com',
-    name: 'Zonal Manager',
-    role: ROLES.ZONAL_MANAGER
-  },
-  'admin@test.com': {
-    email: 'admin@test.com',
-    name: 'System Admin',
-    role: ROLES.ADMIN
-  }
-}
-
-export const generateDemoData = () => {
-  return [
-    {
-      mid: 1,
-      branch_name: 'Mumbai Central',
-      createdDTM: '2024-02-15T08:30:00',
-      fname: 'Rahul',
-      lname: 'Sharma',
-      cluster_name: 'West',
-      zone_name: 'Maharashtra'
-    },
-    {
-      mid: 2,
-      branch_name: 'Delhi North',
-      createdDTM: '2024-02-16T09:15:00',
-      fname: 'Priya',
-      lname: 'Patel',
-      cluster_name: 'North',
-      zone_name: 'Delhi NCR'
-    },
-    {
-      mid: 3,
-      branch_name: 'Bangalore Tech',
-      createdDTM: '2024-02-17T07:45:00',
-      fname: 'Anil',
-      lname: 'Kumar',
-      cluster_name: 'South',
-      zone_name: 'Karnataka'
-    },
-    {
-      mid: 4,
-      branch_name: 'Chennai Industrial',
-      createdDTM: '2024-02-18T08:00:00',
-      fname: 'Deepa',
-      lname: 'Reddy',
-      cluster_name: 'South',
-      zone_name: 'Tamil Nadu'
-    },
-    {
-      mid: 5,
-      branch_name: 'Kolkata East',
-      createdDTM: '2024-02-19T09:30:00',
-      fname: 'Sanjay',
-      lname: 'Gupta',
-      cluster_name: 'East',
-      zone_name: 'West Bengal'
-    },
-    {
-      mid: 6,
-      branch_name: 'Pune Corporate',
-      createdDTM: '2024-02-20T07:15:00',
-      fname: 'Meera',
-      lname: 'Desai',
-      cluster_name: 'West',
-      zone_name: 'Maharashtra'
-    },
-    {
-      mid: 7,
-      branch_name: 'Hyderabad Tech Park',
-      createdDTM: '2024-02-21T08:45:00',
-      fname: 'Vikram',
-      lname: 'Singh',
-      cluster_name: 'South',
-      zone_name: 'Telangana'
-    },
-    {
-      mid: 8,
-      branch_name: 'Ahmedabad Business',
-      createdDTM: '2024-02-22T09:00:00',
-      fname: 'Neha',
-      lname: 'Patel',
-      cluster_name: 'West',
-      zone_name: 'Gujarat'
-    },
-    {
-      mid: 9,
-      branch_name: 'Jaipur Heritage',
-      createdDTM: '2024-02-23T07:30:00',
-      fname: 'Rajesh',
-      lname: 'Mehta',
-      cluster_name: 'North',
-      zone_name: 'Rajasthan'
-    },
-    {
-      mid: 10,
-      branch_name: 'Lucknow Government',
-      createdDTM: '2024-02-24T08:15:00',
-      fname: 'Asha',
-      lname: 'Kumari',
-      cluster_name: 'North',
-      zone_name: 'Uttar Pradesh'
-    }
-  ];
 };

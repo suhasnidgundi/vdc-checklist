@@ -43,9 +43,11 @@ import { ROLES } from "../../constants";
 import Login from "../pages/auth/login";
 import Logout from "../pages/auth/Logout";
 import Middleware from "./middleware";
+import BmCombinedGrid from "../pages/dashboards/BM/BmCombinedGrid";
+import Bm_z_CombinedGrid from "../pages/dashboards/AVP/Bm_z_CombinedGrid";
 
 export const router = createBrowserRouter([
-  // Public routes
+  // Public routes (no authentication required)
   {
     path: "/login",
     element: <Login />,
@@ -71,9 +73,55 @@ export const router = createBrowserRouter([
     element: <Welcome />,
   },
 
-  // Cluster Manager routes
+  // Base level routes (accessible by all authenticated users)
   {
-    element: <Middleware allowedRoles={[ROLES.CLUSTER_MANAGER]} />,
+    element: <Middleware />,
+    children: [
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+      }
+    ]
+  },
+
+  // Branch Manager routes
+  {
+    element: <Middleware allowedRoles={[ROLES.BM]} />,
+    children: [
+      {
+        path: '/BM_Dashboard',
+        element: <BMDashboard />,
+      },
+      {
+        path: '/bmgrid',
+        element: <BmGrid />,
+      },
+      {
+        path: '/bmcombogrid',
+        element: <BmCombinedGrid />,
+      },
+      {
+        path: '/bmnightgrid',
+        element: <BmNightGrid />,
+      },
+      {
+        path: '/bmnighttask',
+        element: <BmNightTask />,
+      },
+      {
+        path: '/AddBmMorningTask',
+        element: <AddBmMorningTask />,
+      },
+      {
+        path: '/AddBmNightTask',
+        element: <AddBmNightTask />,
+      }
+    ]
+  },
+
+  // Cluster Manager and higher routes
+  {
+    element: <Middleware allowedRoles={[ROLES.CM, ROLES.ZONAL_MANAGER, ROLES.AVP, ROLES.SUPER_ADMIN]} />,
     children: [
       {
         path: '/CM_Dashboard',
@@ -88,6 +136,14 @@ export const router = createBrowserRouter([
         element: <CmNightTask />,
       },
       {
+        path: '/EditBmMorningTask',
+        element: <EditBmMorningTask />,
+      },
+      {
+        path: '/EditBmNightTask',
+        element: <EditBmNightTask />,
+      },
+      {
         path: '/cmGrid',
         element: <CmGrid />,
       },
@@ -98,10 +154,6 @@ export const router = createBrowserRouter([
       {
         path: '/Bmc_NightGrid',
         element: <Bmc_NightGrid />,
-      },
-      {
-        path: '/cmtask',
-        element: <CmTask />,
       },
       {
         path: '/EditCmMorningTask/:mid',
@@ -118,10 +170,9 @@ export const router = createBrowserRouter([
     ]
   },
 
-  // Zonal Manager routes
-  
+  // Zonal Manager and higher routes
   {
-    element: <Middleware allowedRoles={[ROLES.ZONAL_MANAGER]} />,
+    element: <Middleware allowedRoles={[ROLES.ZONAL_MANAGER, ROLES.AVP, ROLES.SUPER_ADMIN]} />,
     children: [
       {
         path: '/ZONAL_Dashboard',
@@ -138,9 +189,9 @@ export const router = createBrowserRouter([
     ]
   },
 
-  // AVP routes
+  // AVP and higher routes
   {
-    element: <Middleware allowedRoles={[ROLES.AVP]} />,
+    element: <Middleware allowedRoles={[ROLES.AVP, ROLES.SUPER_ADMIN]} />,
     children: [
       {
         path: '/AVP_Dashboard',
@@ -155,13 +206,13 @@ export const router = createBrowserRouter([
         element: <AvpCm />,
       },
       {
-        path: '/cmtask',
-        element: <CmTask />,
+        path: '/Bm_z_CombinedGrid',
+        element: <Bm_z_CombinedGrid />,
       }
     ]
   },
 
-  // SUPER ADMIN routes
+  // Super Admin only routes
   {
     element: <Middleware allowedRoles={[ROLES.SUPER_ADMIN]} />,
     children: [
@@ -192,18 +243,7 @@ export const router = createBrowserRouter([
       {
         path: '/manage_zone',
         element: <ManageZone />,
-      },
-    ]
-  },
-
-  // Common routes for all authenticated users
-  {
-    element: <Middleware />,
-    children: [
-      {
-        path: "/dashboard",
-        element: <Dashboard />,
       }
     ]
-  },
+  }
 ]);

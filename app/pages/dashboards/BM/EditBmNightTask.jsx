@@ -1,8 +1,9 @@
 import React from 'react'
+import DashboardLayout from '../../../layouts/DashboardLayout'
 
 function EditBmNightTask() {
   return (
-    <div>EditBmNightTask</div>
+    <DashboardLayout>EditBmNightTask</DashboardLayout>
   )
 }
 
