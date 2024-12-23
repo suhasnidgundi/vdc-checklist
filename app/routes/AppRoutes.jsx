@@ -75,7 +75,7 @@ export const router = createBrowserRouter([
 
   // Base level routes (accessible by all authenticated users)
   {
-    element: <Middleware />,
+    element: <Middleware allowedRoles={[ROLES.AVP, ROLES.BM, ROLES.CM, ROLES.EMPLOYEE, ROLES.SUPER_ADMIN, ROLES.ZONAL_MANAGER]} />,
     children: [
       {
         path: "/dashboard",
@@ -191,7 +191,7 @@ export const router = createBrowserRouter([
 
   // AVP and higher routes
   {
-    element: <Middleware allowedRoles={[ROLES.AVP, ROLES.SUPER_ADMIN]} />,
+    element: <Middleware allowedRoles={[ROLES.AVP, ROLES.SUPER_ADMIN, ROLES.ZONAL_MANAGER]} />,
     children: [
       {
         path: '/AVP_Dashboard',

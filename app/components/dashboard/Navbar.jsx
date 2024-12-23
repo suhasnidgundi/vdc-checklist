@@ -1,7 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import useAuthStore from '../../store/authStore';
 
 function Navbar() {
+
+    const { role } = useAuthStore();
+
     return (
         <nav className="main-header navbar navbar-expand navbar-white navbar-light">
             {/* <!-- Left navbar links --> */}
@@ -10,10 +14,7 @@ function Navbar() {
                     <Link className="nav-link" data-widget="pushmenu" to="#" role="button"><i className="fas fa-bars"></i></Link>
                 </li>
                 <li className="nav-item d-none d-sm-inline-block">
-                    <Link to="/" className="nav-link">Home</Link>
-                </li>
-                <li className="nav-item d-none d-sm-inline-block">
-                    <Link to="/contact" className="nav-link">Contact</Link>
+                    <a style={{ color: "red" }} className="nav-link">{role}</a>
                 </li>
             </ul>
 
